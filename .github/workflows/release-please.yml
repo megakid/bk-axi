@@ -34,5 +34,12 @@ jobs:
       - run: npm run verify
         if: ${{ steps.release.outputs.release_created }}
 
-      - run: npm publish --access public --provenance
+      - name: Publish to npm
         if: ${{ steps.release.outputs.release_created }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          if [ -n "${NODE_AUTH_TOKEN:-}" ]; then
+            printf '//registry.npmjs.org/:_authToken=%s\n' "$NODE_AUTH_TOKEN" > ~/.npmrc
+          fi
+          npm publish --access public --provenance
