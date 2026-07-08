@@ -1,0 +1,59 @@
+{
+  "name": "bk-axi",
+  "version": "0.1.0",
+  "description": "AXI-compliant Buildkite CLI wrapper with token-efficient TOON output",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/megakid/bk-axi.git"
+  },
+  "bin": {
+    "bk-axi": "./dist/bin/bk-axi.js"
+  },
+  "files": [
+    "dist",
+    "skills/bk-axi",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "build:skill": "tsx scripts/build-skill.ts",
+    "check:skill": "tsx scripts/build-skill.ts --check",
+    "dev": "tsx bin/bk-axi.ts",
+    "lint": "eslint .",
+    "prepublishOnly": "npm run verify",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "verify": "npm run build:skill && npm run typecheck && npm run test && npm run lint && npm run build"
+  },
+  "keywords": [
+    "buildkite",
+    "cli",
+    "agent",
+    "axi",
+    "toon",
+    "bk"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@toon-format/toon": "^2.3.0",
+    "axi-sdk-js": "^0.1.8"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^22.0.0",
+    "eslint": "^10.1.0",
+    "globals": "^17.4.0",
+    "tsx": "^4.0.0",
+    "typescript": "^5.7.0",
+    "typescript-eslint": "^8.58.0",
+    "vitest": "^3.0.0"
+  }
+}
